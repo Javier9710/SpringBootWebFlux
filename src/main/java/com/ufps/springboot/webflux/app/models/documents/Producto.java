@@ -18,10 +18,21 @@ public class Producto {
 	private Date createAt;
 	
 	//----------------------------------
+	
+	public Producto() {
+		
+	}
+	
+	public Producto(String nombre, Double precio) {
+		this.nombre = nombre;
+		this.precio = precio;
+	}
 
 	public String getId() {
 		return id;
 	}
+
+
 
 	public void setId(String id) {
 		this.id = id;
