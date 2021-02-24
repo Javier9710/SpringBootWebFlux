@@ -54,5 +54,35 @@ public class ProductoController {
 		
 		return "listar";
 	}
+	
+	@GetMapping(value = {"/listar-full"})
+	public String listarFull(Model model) {
+		Flux<Producto> productos = productoDao.findAll()
+				.map(producto -> {
+					producto.setNombre(producto.getNombre().toUpperCase());
+					return producto;
+				}).repeat(5000);
+		
+		
+		model.addAttribute("productos", productos);
+		model.addAttribute("titulo", "Listado de Prodcutos");		
+		
+		return "listar";
+	}
+	
+	@GetMapping(value = {"/listar-chunked"})
+	public String listarChunked(Model model) {
+		Flux<Producto> productos = productoDao.findAll()
+				.map(producto -> {
+					producto.setNombre(producto.getNombre().toUpperCase());
+					return producto;
+				}).repeat(5000);
+		
+		
+		model.addAttribute("productos", productos);
+		model.addAttribute("titulo", "Listado de Prodcutos");		
+		
+		return "listar-chunked";
+	}
 }
 
